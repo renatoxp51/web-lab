@@ -1,8 +1,18 @@
+
+
 function Login(){
     return(
         <div>
-            <h1>ola pessoal</h1>
+             <form>
+                <h1>Login</h1>
+                <label>Nome: </label>
+                <input type="email" placeholder="example@example.com" />
+
+                <label>Senha: </label>
+                <input type="password" placeholder="Sua senha"/>
+            </form>
         </div>
+       
     )
 }
 
