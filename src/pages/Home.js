@@ -1,7 +1,7 @@
 function Home(){
     return(
         <div>
-            <h1>ola pessoal</h1>
+            <h1>Você está na nossa plataforma</h1>
         </div>
     )
 }

@@ -1,7 +1,8 @@
 function Cadastro(){
     return(
         <div>
-            <h1>ola pessoal</h1>
+
+            <h1>Faça seu cadastro agora mesmo</h1>
         </div>
     )
 }

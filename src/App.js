@@ -1,14 +1,12 @@
-import './App.css';
+import '../src/styles/global.css';
 
-import Navigator from './components/Navigator';
-import Login from './pages/Login';
+import RoutesApp from './routes/RoutesApp';
 
 function App() {
   return (
     <div className="App">
       <body>
-        <Navigator />
-        <Login />
+        <RoutesApp />
       </body>
     </div>
   );
