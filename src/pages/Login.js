@@ -1,48 +1,47 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import { fazerLogin } from '../service/service';
+import { useNavigate } from 'react-router-dom';
 
-function Login(){
+function Login({ setIsLoggedIn }) {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const navigate = useNavigate();
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+  const handleLogin = () => {
+    fazerLogin({ emailUsuario: email, senhaUsuario: senha })
+      .then((data) => {
+        console.log('Login bem-sucedido:', data);
+        localStorage.setItem('token', data.token);
+        setIsLoggedIn(true);
+        navigate('/inicio'); // Uso de navigate para redirecionar para '/inicio'
+      })
+      .catch((error) => {
+        console.error('Erro ao fazer login:', error);
+      });
+  };
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-
-        console.log(JSON.stringify({email, password}));
-
-        // const response = await axios.post("",
-        //     JSON.stringify({email, password}),
-        //     {
-        //         headers: { 'Content-Type': 'application/json'}
-        //     }
-        // );
-    };
-
-
-
-    return(
-        <div>
-            <h1>Faça agora o seu LOGIN aqui</h1>
-             <form>
-                <h1>Login</h1>
-                <label>Email: </label>
-                <input type="email" 
-                placeholder="example@example.com" 
-                onChange={(e) => setEmail(e.target.value)} 
-                required
-                />
-
-                <label>Senha: </label>
-                <input type="password"
-                placeholder="Sua senha"
-                onChange={(e) => setPassword(e.target.value)} 
-                required
-                />
-                <button onClick={handleLogin}>Login</button>
-            </form>
-        </div>
-       
-    )
+  return (
+    <div>
+      <h1>Login</h1>
+      <input
+        type="text"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={{ display: 'block', marginBottom: '10px' }}
+      />
+      <input
+        type="password"
+        placeholder="Senha"
+        value={senha}
+        onChange={(e) => setSenha(e.target.value)}
+        style={{ display: 'block', marginBottom: '10px' }}
+      />
+      <button onClick={handleLogin} style={{ display: 'block', marginBottom: '10px' }}>
+        Login
+      </button>
+    </div>
+  );
 }
 
-export default Login
+export default Login;

@@ -1,30 +1,42 @@
-import styled from "styled-components"
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Home from '../pages/Home';
+import Inicio from '../pages/Inicio';
+import Login from '../pages/Login';
+import Cadastro from '../pages/Cadastro';
+import Laboratorio from '../pages/Laboratorios';
+import Reserva from '../pages/Reserva';
 
-function Navigator(){
+function Navigator() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [checkingLogin, setCheckingLogin] = useState(true);
 
-const Nav = styled.nav`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid #BF4F74;
-  color: #BF4F74;
-  margin: 0 1em;
-  padding: 0.25em 1em;
-  display: flex;
-  
-`
+  useEffect(() => {
+    // Verifica se o usuário está logado
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+    setCheckingLogin(false); // Marca que a verificação foi concluída
+  }, []);
 
-    return(
-        <div>
-            <Nav>
-                <ul >
-                    <li>Home</li>
-                    <li>Agendar</li>
-                    <li>Atualizar</li>
-                    <li>Agenda</li>
-                </ul>
-            </Nav>
-        </div>
-    )
+  // Mostra uma tela de carregamento enquanto verifica o login
+  if (checkingLogin) {
+    return <div>Verificando Login...</div>;
+  }
+
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/inicio" element={isLoggedIn ? <Inicio /> : <Navigate to="/login" />} />
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/laboratorio" element={isLoggedIn ? <Laboratorio /> : <Navigate to="/login" />} />
+        <Route path="/reserva" element={isLoggedIn ? <Reserva /> : <Navigate to="/login" />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default Navigator
+export default Navigator;
