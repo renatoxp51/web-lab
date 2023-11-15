@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import Cadastro from '../pages/Cadastro';
 import Laboratorio from '../pages/Laboratorios';
 import Reserva from '../pages/Reserva';
+import styles from './Navigator.module.css'; 
 
 function Navigator() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,7 +27,7 @@ function Navigator() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/inicio" element={isLoggedIn ? <Inicio /> : <Navigate to="/login" />} />

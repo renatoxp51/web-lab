@@ -1,0 +1,102 @@
+/* Cadastro.css */
+
+/* Estilos gerais da página de cadastro */
+.cadastro-body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+}
+
+/* Plano de fundo da página de cadastro */
+.cadastro-background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://www.impacta.edu.br/themes/wc_agenciar3/images/default.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex; /* Adicionado display flex */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+  z-index: -1; /* Move o plano de fundo para trás do conteúdo */
+}
+
+
+/* Container do formulário de cadastro */
+.cadastro-form-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: left;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container dos botões */
+.button-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Estilos para cabeçalhos (h1) */
+h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Estilos para rótulos (labels) */
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Estilos para campos de entrada (input) e seleção (select) */
+input,
+select {
+  width: 100%;
+  padding: 5px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Definindo largura fixa para todos os campos de texto */
+input[type="text"],
+input[type="password"],
+select {
+  width: calc(100% - 16px); /* Ajuste para compensar o padding */
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: 1px solid #4caf50;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Efeito de hover nos botões */
+button:hover {
+  background-color: #45a049;
+}

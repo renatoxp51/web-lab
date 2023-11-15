@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { createRoot } from 'react-dom/client';  // Importe createRoot corretamente
+import { createRoot } from 'react-dom/client';  // Importa createRoot corretamente
 
 import App from './App';
 
