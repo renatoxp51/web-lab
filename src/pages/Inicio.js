@@ -18,4 +18,4 @@ function Inicio() {
   );
 }
 
-export {Inicio};
+export  {Inicio};

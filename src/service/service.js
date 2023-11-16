@@ -5,7 +5,7 @@ export const getLaboratorios = async () => {
     const response = await api('Laboratorio');
     return response;
   } catch (error) {
-    console.error('Erro ao obter laboratórios:', error);
+    console.error('Erro ao obter laboratórios:', error.message);
     throw error;
   }
 };
@@ -93,10 +93,11 @@ export const criarUsuario = async (userData) => {
 export const fazerLogin = async (loginData) => {
   try {
     const response = await api('Usuario/login', 'POST', loginData);
-
-    // Log the entire API response for debugging
     console.log('Resposta API:', response);
+    return response;
   } catch (error) {
+    console.error('Erro ao fazer login:', error);
+    throw new Error('Erro ao fazer login.');
   }
 };
 

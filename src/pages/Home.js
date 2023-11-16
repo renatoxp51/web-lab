@@ -1,15 +1,15 @@
 // Home.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { fazerLogin } from '../service/service';
 import './css/Home.css';
 
-const Home = ({ setIsLoggedIn }) => {
+const Home = ({ setIsLoggedIn, isLoggedIn }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,32 +19,50 @@ const Home = ({ setIsLoggedIn }) => {
   const handleLogin = async () => {
     try {
       setIsLoading(true);
-
+  
       if (!email || !senha) {
         throw new Error('Preencha todos os campos.');
       }
-
+  
       console.log('Tentativa de login com email:', email);
-
+  
       const response = await fazerLogin({
         emailUsuario: email,
         senhaUsuario: senha,
       });
-
-      // Assuming the response contains an 'error' property
+  
       if (response && response.error) {
-        throw new Error(response.error);
+        let errorMessage = '';
+  
+        switch (response.error) {
+          case 'INVALID_EMAIL':
+            errorMessage = 'O email informado não existe.';
+            break;
+          case 'INVALID_PASSWORD':
+            errorMessage = 'A senha informada está incorreta.';
+            break;
+          default:
+            errorMessage = 'Erro desconhecido.';
+        }
+  
+        throw new Error(errorMessage);
       }
-
-      // Handle successful login (update state, redirect, etc.)
+  
       setIsLoggedIn(true);
-      navigate('/inicio'); // Redirect to the "/inicio" page after successful login
+      navigate('/inicio');
     } catch (error) {
-      console.error('Erro ao fazer login:', error);
+      setErrorMessage(error.message);
     } finally {
       setIsLoading(false);
     }
   };
+
+  // Redirect to the "/inicio" page if the user is already logged in
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/inicio');
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div className="homeBackgroundContainer">

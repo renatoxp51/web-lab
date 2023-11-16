@@ -4,47 +4,61 @@ import { useNavigate } from 'react-router-dom';
 import './css/Cadastro.css';
 
 
-function Cadastro() {
+const Cadastro = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [documento, setDocumento] = useState('');
-  const [tipoDocumento, setTipoDocumento] = useState('CPF'); // Default to CPF
+  const [tipoDocumento, setTipoDocumento] = useState('CPF');
   const [telefone, setTelefone] = useState('');
   const [mensagem, setMensagem] = useState('');
-  const [tipoUsuario, setTipoUsuario] = useState('Aluno'); // New state variable for "Você é?"
+  const [tipoUsuario, setTipoUsuario] = useState('Aluno');
   const navigate = useNavigate();
 
-  const formatarDocumento = (input) => {
-    // Remove caracteres não numéricos
-    const numericInput = input.replace(/\D/g, '');
+  // Função para formatar o documento
+  const handleDocumentoChange = (e) => {
+    const input = e.target.value;
+    setDocumento(() => {
+      const numericInput = input.replace(/\D/g, '');
+      const limitedInput =
+        tipoDocumento === 'CNPJ' ? numericInput.substring(0, 14) : numericInput.substring(0, 11);
 
-    // Limita o campo a 14 caracteres para CNPJ e 11 para CPF
-    const formattedDocumento =
-      tipoDocumento === 'CNPJ'
-        ? numericInput.substring(0, 14)
-        : numericInput.substring(0, 11);
+      const formattedInput =
+        tipoDocumento === 'CNPJ'
+          ? limitedInput.replace(
+              /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
+              '$1.$2.$3/$4-$5'
+            )
+          : limitedInput.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
 
-    // Formata o CPF no formato "111.111.111-11" e CNPJ no formato "11.111.111/1111-11"
-    return tipoDocumento === 'CNPJ'
-      ? formattedDocumento.replace(
-          /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
-          '$1.$2.$3/$4-$5'
-        )
-      : formattedDocumento.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4');
+      return formattedInput;
+    });
   };
 
-  const formatarTelefone = (input) => {
-    // Remove caracteres não numéricos
-    const numericInput = input.replace(/\D/g, '');
-
-    // Limita o campo a 11 caracteres
-    const formattedTelefone = numericInput.substring(0, 11);
-
-    // Formata o telefone no formato "(11) 11111-1111"
-    return formattedTelefone.replace(/^(\d{2})(\d{4,5})(\d{4})$/, '($1) $2-$3');
+  // Função para formatar o telefone
+  const handleTelefoneChange = (e) => {
+    const input = e.target.value;
+    setTelefone(() => {
+      const numericInput = input.replace(/\D/g, '');
+      const limitedInput = numericInput.substring(0, 11);
+      const formattedInput = limitedInput.replace(/^(\d{2})(\d{4,5})(\d{4})$/, '($1) $2-$3');
+      return formattedInput;
+    });
   };
 
+  // Função para lidar com a troca de tipo de documento
+  const handleTipoDocumentoChange = (e) => {
+    const novoTipoDocumento = e.target.value;
+
+    // Se o tipo de documento foi alterado, limpar o valor do documento
+    if (novoTipoDocumento !== tipoDocumento) {
+      setDocumento('');
+    }
+
+    setTipoDocumento(novoTipoDocumento);
+  };
+
+  // Função para lidar com o cadastro
   const handleCadastro = async () => {
     try {
       if (!nome || !email || !senha || !documento || !telefone || !tipoUsuario) {
@@ -52,28 +66,23 @@ function Cadastro() {
         return;
       }
 
-      try {
-        const response = await criarUsuario({
-          idTipoUsuario: tipoUsuario === 'Aluno' ? 1 : 2, // Assuming 1 for Aluno and 2 for Professor
-          nomeUsuario: nome,
-          emailUsuario: email,
-          senhaUsuario: senha,
-          cpfCnpjUsuario: documento,
-          telefoneUsuario: telefone,
-        });
+      const response = await criarUsuario({
+        idTipoUsuario: tipoUsuario === 'Aluno' ? 1 : 2,
+        nomeUsuario: nome,
+        emailUsuario: email,
+        senhaUsuario: senha,
+        cpfCnpjUsuario: documento.replace(/\D/g, ''),
+        telefoneUsuario: telefone.replace(/\D/g, ''),
+      });
 
-        if (response.status === 'success') {
-          setMensagem('Cadastro realizado com sucesso');
-          navigate('/login');
-        } else {
-          setMensagem('Erro ao cadastrar: ' + response.message);
-        }
-      } catch (error) {
-        console.error('Erro ao cadastrar:', error);
-        setMensagem('Erro ao cadastrar. Tente novamente mais tarde.');
+      if (response.status === 'success') {
+        setMensagem('Cadastro realizado com sucesso');
+        navigate('/');
+      } else {
+        setMensagem('Erro ao cadastrar: ' + response.message);
       }
     } catch (error) {
-      console.error('Erro ao cadastrar (outer try):', error);
+      console.error('Erro ao cadastrar:', error);
       setMensagem('Erro ao cadastrar. Tente novamente mais tarde.');
     }
   };
@@ -84,19 +93,12 @@ function Cadastro() {
         <h1>Cadastro</h1>
         <label>
           Nome:
-          <input
-            type="text"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          />
+          <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
         </label>
         <div>
           <label>
             Você é um{' '}
-            <select
-              value={tipoUsuario}
-              onChange={(e) => setTipoUsuario(e.target.value)}
-            >
+            <select value={tipoUsuario} onChange={(e) => setTipoUsuario(e.target.value)}>
               <option value="Aluno">Aluno</option>
               <option value="Professor">Professor</option>
             </select>
@@ -104,26 +106,18 @@ function Cadastro() {
         </div>
         <label>
           Email:
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
         </label>
         <label>
           Senha:
-          <input
-            type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-          />
+          <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
         </label>
         <div>
           <label>
             Tipo de Documento:{' '}
             <select
               value={tipoDocumento}
-              onChange={(e) => setTipoDocumento(e.target.value)}
+              onChange={handleTipoDocumentoChange} // Atualizado para usar a nova função
             >
               <option value="CPF">CPF</option>
               <option value="CNPJ">CNPJ</option>
@@ -132,16 +126,7 @@ function Cadastro() {
         </div>
         <label>
           Documento:
-          <input
-            type="text"
-            value={documento}
-            onChange={(e) => {
-              const input = e.target.value;
-              if (tipoDocumento === 'CNPJ' ? input.length <= 14 : input.length <= 11) {
-                setDocumento(formatarDocumento(input));
-              }
-            }}
-          />
+          <input type="text" value={documento} onChange={handleDocumentoChange} />
         </label>
         <label>
           Telefone:
@@ -149,12 +134,7 @@ function Cadastro() {
             type="text"
             placeholder="(DDD e número)"
             value={telefone}
-            onChange={(e) => {
-              const input = e.target.value;
-              if (input.length <= 11) {
-                setTelefone(formatarTelefone(input));
-              }
-            }}
+            onChange={handleTelefoneChange}
           />
         </label>
         <div className="button-container">
@@ -164,6 +144,6 @@ function Cadastro() {
       </div>
     </div>
   );
-}
+};
 
-export {Cadastro};
+export { Cadastro };

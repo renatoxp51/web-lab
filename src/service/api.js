@@ -34,11 +34,17 @@ const api = async (endpoint, method = 'GET', body = null) => {
 
     if (contentType && contentType.includes('application/json')) {
       // Se a resposta é JSON, parseia a resposta como JSON
-      return response.json();
+      const result = await response.json();
+
+      if (result.error === 'AUTHENTICATION_FAILED') {
+        throw new Error('Autenticação falhou. Por favor, faça login novamente.');
+      }
+      return result;
+
     } else {
       // Se a resposta não é JSON, obtém mensagem de texto da resposta
       const errorMessage = await response.text();
-      throw new Error(`Erro na requisição: ${response.status} - ${errorMessage}`);
+      throw new Error(errorMessage);
     }
   } catch (error) {
     console.error('Erro na API:', error);

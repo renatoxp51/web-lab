@@ -1,5 +1,5 @@
 import React, {useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import { Home } from '../pages/Home';
 import { Inicio } from '../pages/Inicio';
 import { Cadastro } from '../pages/Cadastro';
@@ -17,11 +17,32 @@ function Navigator() {
   return (
     <div className={styles.container}>
       <Routes>
-        <Route path="/" element={<Home setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
-        <Route path="/inicio" element={<AuthLayout isLoggedIn={isLoggedIn}><Inicio /></AuthLayout>} />
+        <Route
+          path="/"
+          element={
+            <Home
+              setIsLoggedIn={setIsLoggedIn}
+              isLoggedIn={isLoggedIn}
+            />
+          }
+        />
+        {isLoggedIn && (
+          <>
+            <Route
+              path="/inicio"
+              element={<AuthLayout isLoggedIn={isLoggedIn}><Inicio /></AuthLayout>}
+            />
+            <Route
+              path="/laboratorio"
+              element={<AuthLayout isLoggedIn={isLoggedIn}><Laboratorio /></AuthLayout>}
+            />
+            <Route
+              path="/reserva"
+              element={<AuthLayout isLoggedIn={isLoggedIn}><Reserva /></AuthLayout>}
+            />
+          </>
+        )}
         <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/laboratorio" element={<AuthLayout isLoggedIn={isLoggedIn}><Laboratorio /></AuthLayout>} />
-        <Route path="/reserva" element={<AuthLayout isLoggedIn={isLoggedIn}><Reserva /></AuthLayout>} />
       </Routes>
     </div>
   );
