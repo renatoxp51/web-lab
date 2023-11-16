@@ -111,4 +111,4 @@ function Laboratorio() {
   );
 }
 
-export default Laboratorio;
+export {Laboratorio};

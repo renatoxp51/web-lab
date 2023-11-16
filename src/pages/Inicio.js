@@ -18,4 +18,4 @@ function Inicio() {
   );
 }
 
-export default Inicio;
+export {Inicio};

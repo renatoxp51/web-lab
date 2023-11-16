@@ -83,20 +83,20 @@ export const atualizarUsuarioPorId = async (id, userData) => {
 export const criarUsuario = async (userData) => {
   try {
     const response = await api('Usuario', 'POST', userData);
-    return response;
+    return { status: 'success', data: response.data };
   } catch (error) {
     console.error('Erro ao criar usuário:', error);
-    throw error;
+    return { status: 'error', message: 'Erro ao criar usuário.' };
   }
 };
 
 export const fazerLogin = async (loginData) => {
   try {
     const response = await api('Usuario/login', 'POST', loginData);
-    return response;
+
+    // Log the entire API response for debugging
+    console.log('Resposta API:', response);
   } catch (error) {
-    console.error('Erro ao fazer login:', error);
-    throw error;
   }
 };
 

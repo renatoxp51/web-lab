@@ -50,4 +50,4 @@ function Reserva() {
   );
 }
 
-export default Reserva;
+export {Reserva};

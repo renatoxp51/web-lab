@@ -1,40 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import Home from '../pages/Home';
-import Inicio from '../pages/Inicio';
-import Login from '../pages/Login';
-import Cadastro from '../pages/Cadastro';
-import Laboratorio from '../pages/Laboratorios';
-import Reserva from '../pages/Reserva';
-import styles from './Navigator.module.css'; 
+import React, {useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Home } from '../pages/Home';
+import { Inicio } from '../pages/Inicio';
+import { Cadastro } from '../pages/Cadastro';
+import { Laboratorio } from '../pages/Laboratorios';
+import { Reserva } from '../pages/Reserva';
+import  styles from './Navigator.module.css'; 
+import  AuthLayout from './AuthLayout';
 
 function Navigator() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [checkingLogin, setCheckingLogin] = useState(true);
 
-  useEffect(() => {
-    // Verifica se o usuário está logado
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsLoggedIn(true);
-    }
-    setCheckingLogin(false); // Marca que a verificação foi concluída
-  }, []);
 
-  // Mostra uma tela de carregamento enquanto verifica o login
-  if (checkingLogin) {
-    return <div>Verificando Login...</div>;
-  }
+  console.log('IsLoggedIn:', isLoggedIn);
 
   return (
     <div className={styles.container}>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/inicio" element={isLoggedIn ? <Inicio /> : <Navigate to="/login" />} />
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/" element={<Home setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
+        <Route path="/inicio" element={<AuthLayout isLoggedIn={isLoggedIn}><Inicio /></AuthLayout>} />
         <Route path="/cadastro" element={<Cadastro />} />
-        <Route path="/laboratorio" element={isLoggedIn ? <Laboratorio /> : <Navigate to="/login" />} />
-        <Route path="/reserva" element={isLoggedIn ? <Reserva /> : <Navigate to="/login" />} />
+        <Route path="/laboratorio" element={<AuthLayout isLoggedIn={isLoggedIn}><Laboratorio /></AuthLayout>} />
+        <Route path="/reserva" element={<AuthLayout isLoggedIn={isLoggedIn}><Reserva /></AuthLayout>} />
       </Routes>
     </div>
   );

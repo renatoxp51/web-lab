@@ -18,7 +18,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: url('https://www.impacta.edu.br/themes/wc_agenciar3/images/default.jpg');
   background-size: cover;
   background-position: center;
@@ -33,11 +33,12 @@
 /* Container do formulário de cadastro */
 .cadastro-form-container {
   background-color: white;
+  border: 2px solid rgb(0, 119, 255);
   border-radius: 8px;
-  padding: 1px;
+  padding: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 300px;
-  text-align: left;
+  text-align: center;
   margin: auto;
   position: relative;
   z-index: 1;
@@ -71,10 +72,11 @@ label {
 input,
 select {
   width: 100%;
-  padding: 5px;
+  padding: 8px;
   margin-top: 1px;
   margin-bottom: 1px;
   box-sizing: border-box;
+  text-align: center;
   border: 1px solid #ddd;
   border-radius: 4px;
 }

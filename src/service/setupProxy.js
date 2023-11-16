@@ -1,10 +1,12 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
-module.exports = function(app) {
-  app.use(
-    '/api',
-    createProxyMiddleware({
-      target: 'http://localhost:5209',
-      changeOrigin: true,
-    })
-  );
-};
+const adminMiddleware = (req, res, next) => {
+    if (req.user.role === 'admin') {
+      next(); // User is authorized, continue to the next middleware
+    } else {
+      res.redirect('/unauthorized'); // Redirect to unauthorized page
+    }
+  }
+  
+  // Implement the middleware in your route
+  app.get('/admin/dashboard', adminMiddleware, (req, res) => {
+    // Render admin dashboard
+  });
