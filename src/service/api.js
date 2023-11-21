@@ -1,4 +1,4 @@
-const baseUrl = '/api/';
+const baseUrl = 'https://localhost:7126/api/';
 
 const getToken = () => {
   return localStorage.getItem('token');

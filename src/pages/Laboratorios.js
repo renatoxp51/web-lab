@@ -5,6 +5,7 @@ import {
   atualizarLaboratorio,
   excluirLaboratorio,
 } from '../service/service';
+import Button from '../components/Button';
 
 function Laboratorio() {
   const [laboratorios, setLaboratorios] = useState([]);
@@ -94,7 +95,7 @@ function Laboratorio() {
         ))}
       </ul>
       <h2>Criar Novo Laboratório</h2>
-      <div>
+      <div className='Forms-Create-Lab'>
         <label>Nome:</label>
         <input type="text" name="NomeLaboratorio" value={novoLaboratorio.NomeLaboratorio} onChange={handleInputChange} />
       </div>
@@ -106,7 +107,7 @@ function Laboratorio() {
         <label>Descrição:</label>
         <input type="text" name="DescricaoLaboratorio" value={novoLaboratorio.DescricaoLaboratorio} onChange={handleInputChange} />
       </div>
-      <button onClick={handleCriarLaboratorio}>Criar Laboratório</button>
+      <Button nome="Criar Laboratório" onClick={handleCriarLaboratorio} />
     </div>
   );
 }

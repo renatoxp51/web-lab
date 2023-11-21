@@ -7,6 +7,7 @@ import { Laboratorio } from '../pages/Laboratorios';
 import { Reserva } from '../pages/Reserva';
 import  styles from './Navigator.module.css'; 
 import  AuthLayout from './AuthLayout';
+import Usuario from '../pages/Usuario';
 
 function Navigator() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,6 +40,10 @@ function Navigator() {
             <Route
               path="/reserva"
               element={<AuthLayout isLoggedIn={isLoggedIn}><Reserva /></AuthLayout>}
+            />
+            <Route
+              path="/usuario"
+              element={<AuthLayout isLoggedIn={isLoggedIn}><Usuario /></AuthLayout>}
             />
           </>
         )}

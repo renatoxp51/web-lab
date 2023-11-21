@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { criarReserva } from '../service/service';
+import Button from '../components/Button';
+import './css/Reserva.css';
 
 function Reserva() {
   const [laboratorioId, setLaboratorioId] = useState('');
-  const [data, setData] = useState('');
-  const [hora, setHora] = useState('');
+  const [dataHora, setDataHora] = useState('');
 
   const laboratorios = [
     { id: 'lab1', nome: 'Lab 1' },
@@ -15,8 +16,7 @@ function Reserva() {
   const handleReserva = () => {
     criarReserva({
       laboratorioId: laboratorioId,
-      data: data,
-      hora: hora,
+      data: dataHora
     });
   };
 
@@ -24,10 +24,11 @@ function Reserva() {
     <div>
       <h1>Reserva</h1>
       <p>A reserva padrão é de 1 hora por aluno.</p>
+      <div className='Forms-Create-Reserva'> 
       <select
         value={laboratorioId}
         onChange={(e) => setLaboratorioId(e.target.value)}
-      >
+        >
         <option value="">Selecione um laboratório</option>
         {laboratorios.map((lab) => (
           <option key={lab.id} value={lab.id}>
@@ -36,16 +37,12 @@ function Reserva() {
         ))}
       </select>
       <input
-        type="date"
-        value={data}
-        onChange={(e) => setData(e.target.value)}
-      />
-      <input
-        type="time"
-        value={hora}
-        onChange={(e) => setHora(e.target.value)}
-      />
-      <button onClick={handleReserva}>Reservar</button>
+        type="datetime-local"
+        value={dataHora}
+        onChange={(e) => setDataHora(e.target.value)}
+        />
+      </div>
+      <Button nome="Reservar" onClick={handleReserva} />
     </div>
   );
 }
