@@ -66,22 +66,24 @@ const Home = ({ setIsLoggedIn, isLoggedIn }) => {
 
   return (
     <div className="homeBackgroundContainer">
+      <h1 className='h1ReservaLab'>ReservaLab</h1>
+      <p className='paragrafoLogin'><strong>Seu sistema de agendamento de laboratório!</strong></p> 
       <div className="homeFormContainer">
-        <h2>Bem-vindo à Plataforma ReservaLab</h2>
+        
         <form onSubmit={handleSubmit}>
           <div>
-            <h1>Login</h1>
-            <label>
-              Email:
+            <h4 className='h4Personalizado'>Log-in</h4>
+            <label className='textoCadastro'>
+              <strong>E-mail</strong><br/>
               <input
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                style={{ width: '310px', padding: '8px', marginBottom: '10px' }}
+                style={{ width: '300px', padding: '8px', marginBottom: '10px', }}
               />
             </label>
-            <label>
-              Senha:
+            <label className='textoCadastro'>
+              <strong>Senha</strong><br/>
               <input
                 type="password"
                 value={senha}
@@ -89,16 +91,16 @@ const Home = ({ setIsLoggedIn, isLoggedIn }) => {
                 style={{ width: '300px', padding: '8px', marginBottom: '10px' }}
               />
             </label>
-            <button type="submit" disabled={isLoading} style={{ display: 'inline', marginBottom: '10px' }}>
-              {isLoading ? 'Carregando...' : 'Login'}
+            <button className='botaoEnviar' type="submit" disabled={isLoading} style={{ display: 'inline', marginBottom: '10px' }}>
+              {isLoading ? 'Carregando...' : 'Entrar'}
             </button>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
           </div>
         </form>
         <p>
-          Não tem cadastro? <Link to="/cadastro">Registre-se.</Link>
+          <span className=' textoBranco'> <strong>Não tem cadastro?</strong></span> <Link className='textoLaranja' to="/cadastro"><strong>Registre-se.</strong></Link>
         </p>
-      </div>
+    </div>
     </div>
   );
 };
