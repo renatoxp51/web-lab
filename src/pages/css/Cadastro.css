@@ -1,6 +1,27 @@
 /* Cadastro.css */
 
 /* Estilos gerais da página de cadastro */
+.h1personalizado {
+  font-family: 'calibri', sans-serif;
+  color: #ffffff;
+  font-size: 70px;
+  position: absolute;
+  left: 0%;
+  padding: 200px;
+}
+
+.paragradoReservaLab {
+  
+  font-family: 'calibri', sans-serif;
+  color: #ffffff;
+  font-size: 20px;
+  position: absolute;
+  left: -5%;
+  padding: 270px;
+  
+}
+
+
 .cadastro-body {
   margin: 0;
   padding: 0;
@@ -12,40 +33,26 @@
   background-color: #f0f0f0;
 }
 
+
 /* Plano de fundo da página de cadastro */
-.cadastro-background-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-image: url('https://www.impacta.edu.br/themes/wc_agenciar3/images/default.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex; /* Adicionado display flex */
-  align-items: center; /* Centraliza verticalmente */
-  justify-content: center; /* Centraliza horizontalmente */
-  z-index: -1; /* Move o plano de fundo para trás do conteúdo */
+.cadastro-background-cainer {
+  background-image: linear-gradient(to left, #0e5c7e, #5cbfec);
 }
 
 
 /* Container do formulário de cadastro */
 .cadastro-form-container {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border: 2px solid rgb(0, 119, 255);
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  border-radius: 20px;
+  width: 350px;
   text-align: center;
-  margin: auto;
-  position: relative;
+  position: absolute;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  left: 55%;
+  padding: 25px;
+  
+
 }
 
 /* Container dos botões */
@@ -58,14 +65,14 @@
 /* Estilos para cabeçalhos (h1) */
 h1 {
   color: #333;
-  font-size: 24px;
+  font-size: 30px;
   margin-bottom: 20px;
 }
 
 /* Estilos para rótulos (labels) */
 label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 /* Estilos para campos de entrada (input) e seleção (select) */
@@ -78,7 +85,9 @@ select {
   box-sizing: border-box;
   text-align: center;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 15px;
+  font-family: 'calibri', sans-serif;
+  font-size: 20px;
 }
 
 /* Definindo largura fixa para todos os campos de texto */
@@ -89,16 +98,21 @@ select {
 }
 
 button {
-  background-color: #4caf50;
+  background-color: #007aa2;
   color: white;
-  padding: 10px 15px;
-  border: 1px solid #4caf50;
-  border-radius: 4px;
+  padding: 7px 35px 7px 35px;
+  border: 1px solid #007aa2;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 5px 5px 5px #004b57
 }
 
 /* Efeito de hover nos botões */
 button:hover {
-  background-color: #45a049;
+  color: #007aa2;
+    background-color: #ffffff;
+    border: 1px solid #007aa2;
 }

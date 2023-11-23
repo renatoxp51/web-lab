@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {criarUsuario} from '../service/service'; 
 import { useNavigate } from 'react-router-dom';
@@ -90,50 +91,56 @@ const Cadastro = () => {
 
   return (
     <div className="cadastro-background-container">
+      <div className='h1personalizado'><strong>ReservaLab
+      </strong></div>
+      <div><strong><a className='paragradoReservaLab'>Seu sistema de agendamento de laboratório!
+        </a></strong></div>
       <div className="cadastro-form-container">
         <h1>Cadastro</h1>
         <label>
-          Nome:
-          <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
+          
+          <input type="text" placeholder='Digíte seu nome' value={nome} onChange={(e) => setNome(e.target.value)} />
         </label>
         <div>
           <label>
-            Você é um{' '}
+            {' '}
             <select value={tipoUsuario} onChange={(e) => setTipoUsuario(e.target.value)}>
+              <option value="voce é um?">Você é um:</option>
               <option value="Aluno">Aluno</option>
               <option value="Professor">Professor</option>
             </select>
           </label>
         </div>
         <label>
-          Email:
-          <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+    
+          <input type="text" placeholder='Digíte seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
         </label>
         <label>
-          Senha:
-          <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
+        
+          <input type="password" placeholder='Digíte sua senha' value={senha} onChange={(e) => setSenha(e.target.value)} />
         </label>
         <div>
           <label>
-            Tipo de Documento:{' '}
+          {''}
             <select
               value={tipoDocumento}
               onChange={handleTipoDocumentoChange} // Atualizado para usar a nova função
             >
+              <option value="tipos de documentos"> Tipos de documentos:</option>
               <option value="CPF">CPF</option>
               <option value="CNPJ">CNPJ</option>
             </select>
           </label>
         </div>
         <label>
-          Documento:
-          <input type="text" value={documento} onChange={handleDocumentoChange} />
+        
+          <input type="text" placeholder='Digíte seu documento' value={documento} onChange={handleDocumentoChange} />
         </label>
         <label>
-          Telefone:
+  
           <input
             type="text"
-            placeholder="(DDD e número)"
+            placeholder="Digíte seu telefone (DDD e número)"
             value={telefone}
             onChange={handleTelefoneChange}
           />
