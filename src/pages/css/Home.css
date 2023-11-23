@@ -76,6 +76,9 @@ body{
     height: 100%;
     background-image: url('../../../public/foto-desfocada.jpg');
     background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0;
+    
 }
 
 .homeFormContainer {

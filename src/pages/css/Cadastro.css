@@ -1,5 +1,7 @@
 /* Cadastro.css */
-
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 /* Estilos gerais da página de cadastro */
 .h1personalizado {
   font-family: 'calibri', sans-serif;
@@ -35,8 +37,9 @@
 
 
 /* Plano de fundo da página de cadastro */
-.cadastro-background-cainer {
+.cadastro-background-container {
   background-image: linear-gradient(to left, #0e5c7e, #5cbfec);
+  
 }
 
 
@@ -51,8 +54,10 @@
   z-index: 1;
   left: 55%;
   padding: 25px;
-  
-
+  position: absolute;
+  top: 50%;
+  left: 68%;
+  transform: translate(-50%, -50%);
 }
 
 /* Container dos botões */

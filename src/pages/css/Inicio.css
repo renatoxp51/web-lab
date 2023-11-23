@@ -6,6 +6,7 @@
     width: 300px;
     text-align: center;
     margin: auto ;
+    padding-bottom: 20px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -18,4 +19,15 @@
 .h1Inicio{
     text-align: center;
     align-items: center;
+    color: white;
+    margin-bottom: -20px;
+}
+.h1Inicio2{
+    text-align: center;
+    align-items: center;
+    color: white;
+}
+.paragrafo{
+ margin-bottom: 30px;
+ font-size: 17px;
 }

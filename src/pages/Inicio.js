@@ -6,13 +6,14 @@ import '../pages/css/Inicio.css'
 function Inicio() {
   return (
     <div>
-      <h1 className='h1Inicio'>Bem-vindo ao nosso ReservaLab!</h1>
+      <h2 className='h1Inicio'>Bem-vindo ao nosso</h2>
+      <h1 className='h1Inicio2'><strong>ReservaLab!</strong></h1>
       <div className="BodyInicio">
-        <p>
+        <p className='paragrafo'>
           Aqui você pode acessar os Laboratórios
           fazer Reservas ou verificar suas reservas.
         </p>
-        <div className="DivBtn">
+        <div>
           <Link to="/laboratorio">
             <Button nome="Laboratórios" />
           </Link>
