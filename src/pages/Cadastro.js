@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {criarUsuario} from '../service/service'; 
 import { useNavigate } from 'react-router-dom';
 import './css/Cadastro.css';
+import Button from '../components/Button';
 
 
 const Cadastro = () => {
@@ -138,7 +139,7 @@ const Cadastro = () => {
           />
         </label>
         <div className="button-container">
-          <button onClick={handleCadastro}>Confirmar</button>
+          <Button nome="Confirmar" onClick={handleCadastro}/>
         </div>
         <p>{mensagem}</p>
       </div>

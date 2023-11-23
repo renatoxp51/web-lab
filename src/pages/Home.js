@@ -65,7 +65,7 @@ const Home = ({ setIsLoggedIn, isLoggedIn }) => {
   }, [isLoggedIn, navigate]);
 
   return (
-    <div className="homeBackgroundContainer">
+      <div className="homeBackgroundContainer">
       <h1 className='h1ReservaLab'>ReservaLab</h1>
       <p className='paragrafoLogin'><strong>Seu sistema de agendamento de laboratório!</strong></p> 
       <div className="homeFormContainer">
