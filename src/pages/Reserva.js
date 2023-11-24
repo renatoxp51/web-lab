@@ -3,32 +3,35 @@ import { criarReserva, fazerLogin } from '../service/service';
 import Button from '../components/Button';
 import './css/Reserva.css';
 
-function Reserva() {
+function Reserva({loggedUser}) {
   const [laboratorioId, setLaboratorioId] = useState('');
-  const [dataHora, setDataHora] = useState('2023-01-01T12:00:00');
+  const [data, setdata] = useState(new Date().toISOString().split("T")[0]);
+  const [hora, setHora] = useState(`${new Date().getHours()}:00`);
   const [mensagem, setMensagem] = useState('');
 
 
   const laboratorios = [
-    { id: 'lab1', nome: 'Lab 1' },
-    { id: 'lab2', nome: 'Lab 2' },
-    { id: 'lab3', nome: 'Lab 3' },
+    { id: 1, nome: 'LAB001' },
+    { id: 2, nome: 'LAB002' },
+    { id: 3, nome: 'LAB003' },
   ];
 
+  const handleReserva = async () => {
+  // Cria reserva se estiver disponível
+    try {
+      await criarReserva({
+        IdUsuario: loggedUser.idUsuario,
+        IdLaboratorio: Number(laboratorioId),
+        DiaHorarioReserva: new Date(`${data}T${hora}`),
+        NumeroBoleto: 12345687
+      });
+  
+      setMensagem('Reserva realizada com sucesso!');
+    } catch (error) {
+      setMensagem(error.message);
+    }
 
-  const handleReserva = () => {
 
-    const user = fazerLogin();
-
-     // Se estiver disponível, criar a reserva
-     criarReserva({
-       idUsuario: user.response.usuario.idUsuario,
-       laboratorioId: laboratorioId,
-       data: dataHora,
-       numeroBoleto: 12345687
-     });
- 
-     setMensagem('Reserva realizada com sucesso!');
    };
 
   return (
@@ -48,11 +51,19 @@ function Reserva() {
           </option>
         ))}
       </select>
-      <input
-        className='Input-Reserva'
-        type="datetime-local"
-        value={dataHora}
-        onChange={(e) => setDataHora(e.target.value)}
+        <input className='Input-Reserva' 
+        type="date" 
+        value={data} 
+        min="2023-01-01" 
+        max="2023-12-31" 
+        onChange={(e) => setdata(new Date(e.target.value).toISOString().split('T')[0])} 
+        />
+        <input 
+        type="time" 
+        value={hora} 
+        min="09:00" 
+        max="22:00" 
+        onChange={(e) => setHora(e.target.value)} 
         />
       </div>
       <Button nome="Reservar" onClick={handleReserva} />

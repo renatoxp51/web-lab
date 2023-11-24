@@ -11,6 +11,7 @@ import Usuario from '../pages/Usuario';
 
 function Navigator() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedUser, setLoggedUser] = useState(null);
 
 
   console.log('IsLoggedIn:', isLoggedIn);
@@ -22,6 +23,7 @@ function Navigator() {
           path="/"
           element={
             <Home
+              setLoggedUser={setLoggedUser} 
               setIsLoggedIn={setIsLoggedIn}
               isLoggedIn={isLoggedIn}
             />
@@ -31,19 +33,19 @@ function Navigator() {
           <>
             <Route
               path="/inicio"
-              element={<AuthLayout isLoggedIn={isLoggedIn}><Inicio /></AuthLayout>}
+              element={<AuthLayout isLoggedIn={isLoggedIn}><Inicio loggedUser={loggedUser} /></AuthLayout>}
             />
             <Route
               path="/laboratorio"
-              element={<AuthLayout isLoggedIn={isLoggedIn}><Laboratorio /></AuthLayout>}
+              element={<AuthLayout isLoggedIn={isLoggedIn}><Laboratorio loggedUser={loggedUser} /></AuthLayout>}
             />
             <Route
               path="/reserva"
-              element={<AuthLayout isLoggedIn={isLoggedIn}><Reserva /></AuthLayout>}
+              element={<AuthLayout isLoggedIn={isLoggedIn}><Reserva loggedUser={loggedUser} /></AuthLayout>}
             />
             <Route
               path="/usuario"
-              element={<AuthLayout isLoggedIn={isLoggedIn}><Usuario /></AuthLayout>}
+              element={<AuthLayout isLoggedIn={isLoggedIn}><Usuario loggedUser={loggedUser} /></AuthLayout>}
             />
           </>
         )}

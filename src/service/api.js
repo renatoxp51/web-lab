@@ -4,6 +4,10 @@ const getToken = () => {
   return localStorage.getItem('token');
 };
 
+export const setToken = (token) => {
+  return localStorage.setItem('token', token)
+}
+
 const api = async (endpoint, method = 'GET', body = null) => {
   const token = getToken();
   const headers = {

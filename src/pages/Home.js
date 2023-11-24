@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { fazerLogin } from '../service/service';
 import './css/Home.css';
+import { setToken } from '../service/api';
 
-const Home = ({ setIsLoggedIn, isLoggedIn }) => {
+const Home = ({ setIsLoggedIn, isLoggedIn, setLoggedUser }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -47,8 +48,9 @@ const Home = ({ setIsLoggedIn, isLoggedIn }) => {
   
         throw new Error(errorMessage);
       }
-  
+      setToken(response.myToken);
       setIsLoggedIn(true);
+      setLoggedUser(response.usuario)
       navigate('/inicio');
     } catch (error) {
       setErrorMessage(error.message);

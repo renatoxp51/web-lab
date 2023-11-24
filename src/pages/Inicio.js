@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import '../pages/css/Inicio.css'
 
-function Inicio() {
+function Inicio({loggedUser}) {
+
+  const nome = loggedUser?.nomeUsuario
+
   return (
     <div>
       <h2 className='h1Inicio'>Bem-vindo ao nosso</h2>
-      <h1 className='h1Inicio2'><strong>ReservaLab!</strong></h1>
+      <h1 className='h1Inicio2'><strong>ReservaLab, {nome}!</strong></h1>
       <div className="BodyInicio">
         <p className='paragrafo'>
           Aqui você pode acessar os Laboratórios

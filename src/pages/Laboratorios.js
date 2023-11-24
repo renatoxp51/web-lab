@@ -7,7 +7,7 @@ import {
 } from '../service/service';
 import Button from '../components/Button';
 
-function Laboratorio() {
+function Laboratorio({loggedUser}) {
   const [laboratorios, setLaboratorios] = useState([]);
   const [novoLaboratorio, setNovoLaboratorio] = useState({
     NomeLaboratorio: '',
