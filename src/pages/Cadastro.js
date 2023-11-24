@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import {criarUsuario} from '../service/service'; 
 import { useNavigate } from 'react-router-dom';
 import './css/Cadastro.css';
-import Button from '../components/Button';
 
 
 const Cadastro = () => {
@@ -11,10 +10,10 @@ const Cadastro = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [documento, setDocumento] = useState('');
-  const [tipoDocumento, setTipoDocumento] = useState('CPF');
+  const [tipoDocumento, setTipoDocumento] = useState('');
   const [telefone, setTelefone] = useState('');
   const [mensagem, setMensagem] = useState('');
-  const [tipoUsuario, setTipoUsuario] = useState('Aluno');
+  const [tipoUsuario, setTipoUsuario] = useState('');
   const navigate = useNavigate();
 
   // Função para formatar o documento
@@ -91,50 +90,47 @@ const Cadastro = () => {
 
   return (
     <div className="cadastro-background-container">
-      <div className='h1personalizado'><strong>ReservaLab
-      </strong></div>
-      <div><strong><a className='paragradoReservaLab'>Seu sistema de agendamento de laboratório!
-        </a></strong></div>
       <div className="cadastro-form-container">
         <h1>Cadastro</h1>
         <label>
           
-          <input type="text" placeholder='Digíte seu nome' value={nome} onChange={(e) => setNome(e.target.value)} />
+          <input type="text" placeholder='Digite seu nome' value={nome} onChange={(e) => setNome(e.target.value)} />
         </label>
         <div>
-          <label>
-            {' '}
-            <select value={tipoUsuario} onChange={(e) => setTipoUsuario(e.target.value)}>
-              <option value="voce é um?">Você é um:</option>
-              <option value="Aluno">Aluno</option>
-              <option value="Professor">Professor</option>
-            </select>
-          </label>
+  <label>
+      <select
+      value={tipoUsuario}
+      onChange={(e) => setTipoUsuario(e.target.value)}
+        >
+      <option value="" disabled hidden>Você é um:</option>
+      <option value="Aluno">Aluno</option>
+      <option value="Professor">Professor</option>
+      </select>
+       </label>
         </div>
         <label>
     
-          <input type="text" placeholder='Digíte seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="text" placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)} />
         </label>
         <label>
         
-          <input type="password" placeholder='Digíte sua senha' value={senha} onChange={(e) => setSenha(e.target.value)} />
+          <input type="password" placeholder='Digite sua senha' value={senha} onChange={(e) => setSenha(e.target.value)} />
         </label>
         <div>
-          <label>
-          {''}
-            <select
-              value={tipoDocumento}
-              onChange={handleTipoDocumentoChange} // Atualizado para usar a nova função
-            >
-              <option value="tipos de documentos"> Tipos de documentos:</option>
-              <option value="CPF">CPF</option>
-              <option value="CNPJ">CNPJ</option>
-            </select>
-          </label>
+  <label>
+        <select
+        value={tipoDocumento}
+        onChange={handleTipoDocumentoChange}
+        >
+        <option value="" disabled hidden>Tipo de Documento:</option>
+        <option value="CPF">CPF</option>
+        <option value="CNPJ">CNPJ</option>
+        </select>
+        </label>
         </div>
         <label>
         
-          <input type="text" placeholder='Digíte seu documento' value={documento} onChange={handleDocumentoChange} />
+          <input type="text" placeholder='Digite seu documento' value={documento} onChange={handleDocumentoChange} />
         </label>
         <label>
   
@@ -146,7 +142,7 @@ const Cadastro = () => {
           />
         </label>
         <div className="button-container">
-          <Button nome="Confirmar" onClick={handleCadastro}/>
+        <button onClick={handleCadastro}>Confirmar</button>
         </div>
         <p>{mensagem}</p>
       </div>

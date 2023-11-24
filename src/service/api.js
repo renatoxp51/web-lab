@@ -51,7 +51,6 @@ const api = async (endpoint, method = 'GET', body = null) => {
       throw new Error(errorMessage);
     }
   } catch (error) {
-    console.error('Erro na API:', error);
     throw error;
   }
 };

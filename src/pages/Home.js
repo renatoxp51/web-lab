@@ -25,33 +25,20 @@ const Home = ({ setIsLoggedIn, isLoggedIn, setLoggedUser }) => {
         throw new Error('Preencha todos os campos.');
       }
   
-      console.log('Tentativa de login com email:', email);
-  
       const response = await fazerLogin({
         emailUsuario: email,
         senhaUsuario: senha,
       });
-  
-      if (response && response.error) {
-        let errorMessage = '';
-  
-        switch (response.error) {
-          case 'INVALID_EMAIL':
-            errorMessage = 'O email informado não existe.';
-            break;
-          case 'INVALID_PASSWORD':
-            errorMessage = 'A senha informada está incorreta.';
-            break;
-          default:
-            errorMessage = 'Erro desconhecido.';
-        }
-  
-        throw new Error(errorMessage);
+
+      if (response && response.message) {
+        setIsLoggedIn(false);
+        throw new Error(response.message);
+      } else {
+        setToken(response.myToken);
+        setIsLoggedIn(true);
+        setLoggedUser(response.usuario);
+        navigate('/inicio');
       }
-      setToken(response.myToken);
-      setIsLoggedIn(true);
-      setLoggedUser(response.usuario)
-      navigate('/inicio');
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
@@ -59,7 +46,7 @@ const Home = ({ setIsLoggedIn, isLoggedIn, setLoggedUser }) => {
     }
   };
 
-  // Redirect to the "/inicio" page if the user is already logged in
+  // Redireciona para a página /inicio caso o Login seja efetuado com sucesso.
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/inicio');

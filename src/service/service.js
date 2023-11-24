@@ -96,8 +96,17 @@ export const fazerLogin = async (loginData) => {
     console.log('Resposta API:', response);
     return response;
   } catch (error) {
-    console.error('Erro ao fazer login:', error);
     throw new Error('Erro ao fazer login.');
+  }
+};
+
+export const getReservas = async () => {
+  try {
+    const response = await api('Reserva');
+    return response;
+  } catch (error) {
+    console.error('Erro ao obter reservas:', error.message);
+    throw error;
   }
 };
 
@@ -106,7 +115,27 @@ export const criarReserva = async (novaReserva) => {
     const response = await api('Reserva', 'POST', novaReserva);
     return response;
   } catch (error) {
-    console.error('Erro ao criar reserva:', error);
+    console.error('Erro ao criar reserva:', error.message);
+    throw error;
+  }
+};
+
+export const obterReservaPorId = async (id) => {
+  try {
+    const response = await api(`Reserva/${id}`);
+    return response;
+  } catch (error) {
+    console.error('Erro ao obter reserva por ID:', error.message);
+    throw error;
+  }
+};
+
+export const getReservasPorUsuario = async (idUsuario) => {
+  try {
+    const response = await api(`Reserva/usuario/${idUsuario}`);
+    return response;
+  } catch (error) {
+    console.error('Erro ao obter reservas por usuário:', error.message);
     throw error;
   }
 };

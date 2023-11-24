@@ -1,12 +1,12 @@
 const adminMiddleware = (req, res, next) => {
-    if (req.user.role === 'admin') {
-      next(); // User is authorized, continue to the next middleware
-    } else {
-      res.redirect('/unauthorized'); // Redirect to unauthorized page
-    }
+  if (req.user.role === 'admin') {
+    next(); // O usuário está autorizado, continue para o próximo middleware
+  } else {
+    res.redirect('/unauthorized'); // Redirecionar para página não autorizada
   }
-  
-  // Implement the middleware in your route
-  app.get('/admin/dashboard', adminMiddleware, (req, res) => {
-    // Render admin dashboard
-  });
+}
+
+//  Implementa o middleware em sua rota
+app.get('/admin/dashboard', adminMiddleware, (req, res) => {
+
+});

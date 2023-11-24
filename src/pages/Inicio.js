@@ -13,7 +13,7 @@ function Inicio({loggedUser}) {
       <h1 className='h1Inicio2'><strong>ReservaLab, {nome}!</strong></h1>
       <div className="BodyInicio">
         <p className='paragrafo'>
-          Aqui você pode acessar os Laboratórios
+          Aqui você pode acessar os Laboratórios,
           fazer Reservas ou verificar suas reservas.
         </p>
         <div>
